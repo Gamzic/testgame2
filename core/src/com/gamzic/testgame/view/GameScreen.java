@@ -17,6 +17,8 @@ public class GameScreen implements Screen {
     private Car car;
     private OrthographicCamera camera;
     private Texture carTexture;
+    public static float deltaCff;
+
 
 
 
@@ -26,12 +28,11 @@ public class GameScreen implements Screen {
 batch = new SpriteBatch();
 tazTexture = new Texture(Gdx.files.internal("taz.png"));
 carTexture = new Texture(Gdx.files.internal("car.png"));
+carTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
 taz = new Taz(tazTexture, 0, 0, 1f, 1f * 1f);
-car = new Car(carTexture, 0, 0 ,300, 224);
-
-
+car = new Car(carTexture, 0, 0 ,1f, 1f);
     }
 
 
@@ -40,10 +41,10 @@ car = new Car(carTexture, 0, 0 ,300, 224);
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        deltaCff = delta;
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        car.draw (batch);
+        car.draw(batch);
         batch.end();
 
 

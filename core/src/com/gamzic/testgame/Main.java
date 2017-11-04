@@ -10,8 +10,6 @@ private Screen gameScreen;
 	public void create() {
 		gameScreen = new GameScreen();
 		setScreen(gameScreen);
-
-
 	}
 
 

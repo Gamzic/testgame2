@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Polygon;
 
 abstract class GameObject {
-    public Polygon bounds;
-    public Sprite object;
+   Polygon bounds;
+   Sprite object;
 
     GameObject(Texture texture, float x, float y, float width, float height) {
         object = new Sprite(texture);
@@ -23,8 +23,10 @@ abstract class GameObject {
     public void draw(SpriteBatch batch){
         object.setPosition(bounds.getX(), bounds.getY());
         object.setRotation(bounds.getRotation());
-    object.draw(batch);
+        object.draw(batch);
     }
 
-
+    public Polygon getBounds() {
+        return bounds;
+    }
 }
