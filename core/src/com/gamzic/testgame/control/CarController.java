@@ -13,30 +13,43 @@ public class CarController {
         this.carBounds = carBounds;
     }
 
-    float speed, velocity = 0.02f, speedMax = 3f;
+    float speed, speedVelocity = 7f, speedMax = 15f;
+    float rotationSpeed = 85f;
+
     public void hahdle() {
-        speed = sliseSpeed();
+        //if (Gdx.input.isKeyPressed(Input.Keys.UP)) moveForward(); else downSpeed();
 
 
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            speed +=velocity;
-            carBounds.setPosition(carBounds.getX() + MathUtils.cosDeg(carBounds.getRotation()) * speed * GameScreen.deltaCff,
-                    carBounds.getY() + MathUtils.sinDeg(carBounds.getRotation()) * speed * GameScreen.deltaCff);
-        } else {speed -= velocity;}
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) moveForward(); else downSpeed();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            carBounds.setPosition(carBounds.getX() - MathUtils.cosDeg(carBounds.getRotation() * speed) * GameScreen.deltaCff,
-                    carBounds.getY() - MathUtils.sinDeg(carBounds.getRotation() * speed) * GameScreen.deltaCff);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            carBounds.rotate(170f * GameScreen.deltaCff);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            carBounds.rotate(-170f* GameScreen.deltaCff);
-        }
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) moveBack(); else downSpeed();
 
+
+
+
+        //if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) moveBack(); else downSpeed();
+       if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+       carBounds.rotate(rotationSpeed * GameScreen.deltaCff);
+     }
+      if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+       carBounds.rotate(-rotationSpeed* GameScreen.deltaCff);
+    }
+
+        sliseSpeed();
+        carBounds.setPosition(carBounds.getX() + MathUtils.cosDeg(carBounds.getRotation()) * speed * GameScreen.deltaCff,
+                carBounds.getY() + MathUtils.sinDeg(carBounds.getRotation()) * speed * GameScreen.deltaCff);
 
     }
+    private void moveForward(){speed += speedVelocity*GameScreen.deltaCff;}
+    private void moveBack(){speed -= speedVelocity*GameScreen.deltaCff;}
+
+
+    private void downSpeed(){
+        if (speed > speedVelocity * GameScreen.deltaCff) speed -= speedVelocity * GameScreen.deltaCff;
+        else if (-speed < -speedVelocity * GameScreen.deltaCff) speed += speedVelocity * GameScreen.deltaCff;
+        else speed = 0f;
+        }
+
 
     private float sliseSpeed() {
         if (speed > speedMax) {
