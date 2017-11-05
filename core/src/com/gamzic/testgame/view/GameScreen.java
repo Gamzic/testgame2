@@ -32,7 +32,7 @@ carTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear)
 
 
 taz = new Taz(tazTexture, 0, 0, 1f, 1f * 1f);
-car = new Car(carTexture, 0, 0 ,1f, 1f);
+car = new Car(carTexture, 0, 0 ,1.5f, 1.5f * 0.54f);
     }
 
 
@@ -54,7 +54,7 @@ car = new Car(carTexture, 0, 0 ,1f, 1f);
     public void resize(int width, int height) {
         float aspectRatio = (float) height/width;
         camera = new OrthographicCamera(20f,20f * aspectRatio);
-        camera.zoom = 0.2f;
+        camera.zoom = 0.5f;
         camera.update();
 
 
