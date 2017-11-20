@@ -7,14 +7,17 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gamzic.testgame.model.Car;
+import com.gamzic.testgame.model.Gitler;
 import com.gamzic.testgame.model.Taz;
 
 public class GameScreen implements Screen {
 
+    private Texture gitlerTexture;
     private Texture tazTexture;
     private SpriteBatch batch;
     private Taz taz;
     private Car car;
+    private Gitler gitler;
     private OrthographicCamera camera;
     private Texture carTexture;
     public static float deltaCff;
@@ -27,12 +30,15 @@ public class GameScreen implements Screen {
     public void show() {
 batch = new SpriteBatch();
 tazTexture = new Texture(Gdx.files.internal("taz.png"));
+gitlerTexture= new Texture(Gdx.files.internal("gitler.png"));
+gitlerTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 carTexture = new Texture(Gdx.files.internal("car.png"));
 carTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-
+gitler = new Gitler(gitlerTexture, 0, 0, 1f,1f * 1.64f);
 taz = new Taz(tazTexture, 0, 0, 1f, 1f * 1f);
 car = new Car(carTexture, 0, 0 ,1.5f, 1.5f * 0.54f);
+
     }
 
 
@@ -45,6 +51,7 @@ car = new Car(carTexture, 0, 0 ,1.5f, 1.5f * 0.54f);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         car.draw(batch);
+        gitler.draw(batch);
         batch.end();
 
 
@@ -54,7 +61,8 @@ car = new Car(carTexture, 0, 0 ,1.5f, 1.5f * 0.54f);
     public void resize(int width, int height) {
         float aspectRatio = (float) height/width;
         camera = new OrthographicCamera(20f,20f * aspectRatio);
-        camera.zoom = 0.5f;
+       // camera.setToOrtho();
+        camera.zoom = 0.8f;
         camera.update();
 
 
